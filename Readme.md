@@ -1,7 +1,7 @@
 
 # on-load
 
-  Safely attach a handler to window.onload.
+  Safely attach a handler to `window.onload` regardless of existing handlers.
 
 ## Installation
 

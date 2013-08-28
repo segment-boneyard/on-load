@@ -6,7 +6,7 @@
   "keywords": ["onload", "load", "window"],
   "license": "MIT",
   "dependencies": {
-    "ianstormtaylor/callback": "*"
+    "timoxley/next-tick": "0.0.2"
   },
   "development": {
     "component/assert": "*"

@@ -1,5 +1,5 @@
 
-var callback = require('callback');
+var tick = require('next-tick');
 
 
 /**
@@ -51,6 +51,6 @@ window.onload = function () {
 function onLoad (fn) {
   if ('function' != typeof fn) return;
   loaded
-    ? fn.apply(context, args)
+    ? tick(function () { fn.apply(context, args); })
     : callbacks.push(fn);
 }
