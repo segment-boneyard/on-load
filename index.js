@@ -3,10 +3,17 @@ var callback = require('callback');
 
 
 /**
- * Loaded state.
+ * Expose `onLoad`.
  */
 
-var loaded = false;
+module.exports = onLoad;
+
+
+/**
+ * Cache.
+ */
+
+var loaded, context, args;
 
 
 /**
@@ -17,10 +24,22 @@ var callbacks = [];
 
 
 /**
- * Expose `onLoad`.
+ * Preserve existing `onload`.
  */
 
-module.exports = onLoad;
+if ('function' == typeof window.onload) callbacks.push(window.onload);
+
+
+/**
+ * Bind to `window.onload`.
+ */
+
+window.onload = function () {
+  loaded = true;
+  context = this;
+  args = arguments;
+  for (var i = 0, fn; fn = callbacks[i]; i++) fn.apply(context, args);
+};
 
 
 /**
@@ -30,19 +49,8 @@ module.exports = onLoad;
  */
 
 function onLoad (fn) {
+  if ('function' != typeof fn) return;
   loaded
-    ? callback.async(fn)
+    ? fn.apply(context, args)
     : callbacks.push(fn);
 }
-
-
-/**
- * Bind to `window.onload`.
- */
-
-var old = window.onload;
-window.onload = function () {
-  var fn, loaded = true;
-  callback(old);
-  while(fn = callbacks.shift()) callback(fn);
-};
