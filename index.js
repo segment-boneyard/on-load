@@ -43,5 +43,5 @@ function onLoad (fn) {
 var old = window.onload;
 window.onload = function () {
   loaded = true;
-  callback(old);
+  if ('function' === typeof old) old.apply(this, arguments);
 };

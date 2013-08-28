@@ -2,7 +2,7 @@
   "name": "on-load",
   "repo": "segmentio/on-load",
   "description": "Safely attach a handler to window.onload.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": ["onload", "load", "window"],
   "license": "MIT",
   "dependencies": {
